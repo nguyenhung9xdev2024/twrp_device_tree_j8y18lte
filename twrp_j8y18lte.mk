@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := device/samsung/m11q
+LOCAL_PATH := device/samsung/j8y18lte
 
 # Inherit from those products, Most specific first.
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
@@ -23,8 +23,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_o_mr1.mk
 $(call inherit-product, vendor/twrp/config/common.mk)
 
 # Set those variables here to overwrite the inherited values.
-PRODUCT_NAME := twrp_m11q
-PRODUCT_DEVICE := m11q
+PRODUCT_NAME := twrp_j8y18lte
+PRODUCT_DEVICE := j8y18lte
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
 PRODUCT_GMS_CLIENTID_BASE := android-samsung

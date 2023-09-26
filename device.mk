@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-LOCAL_PATH := device/samsung/m11q
+LOCAL_PATH := device/samsung/j8y18lte
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
@@ -21,39 +21,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_BUILD_SUPER_PARTITION := false
 
-# Boot control HAL
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-service \
-    android.hardware.boot@1.0-impl-wrapper.recovery \
-    android.hardware.boot@1.0-impl-wrapper \
-    android.hardware.boot@1.0-impl.recovery 
-
-# fastbootd
-PRODUCT_PACKAGES += \
-    android.hardware.fastboot@1.0-impl-mock \
-    fastbootd
-
-# Build qcom FBE decryption
-PRODUCT_PACKAGES += \
-    qcom_decrypt \
-    qcom_decrypt_fbe
-
-# Disable adb security
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	ro.mount.fs=EXT4 \
-	ro.allow.mock.location=0 \
-	ro.debuggable=1 \
-	ro.config.low_ram=false
+    ro.treble.enabled=true \
+    sys.usb.controller=7000000.dwc3
 
-# For userdebug builds
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	ro.secure=0 \
-	ro.adb.secure=0 \
-	persist.sys.root_access=1 \
-	persist.service.adb.enable=1
-
-
-# MTP
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mtp,adb

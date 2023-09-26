@@ -13,8 +13,8 @@
 # limitations under the License.
 
 # inherit from the proprietary version
--include vendor/samsung/m11q/BoardConfigVendor.mk
-LOCAL_PATH := device/samsung/m11q
+-include vendor/samsung/j8y18lte/BoardConfigVendor.mk
+LOCAL_PATH := device/samsung/j8y18lte
 
 BUILD_BROKEN_DUP_RULES := true
 
@@ -45,58 +45,32 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8953
 TARGET_NO_BOOTLOADER := true
 
 # Kernel
+TARGET_KERNEL_ARCH := arm64
 BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_RAMDISK_OFFSET := 0x02000000
-BOARD_SECOND_OFFSET := 0x00f00000
 BOARD_TAGS_OFFSET := 0x01e00000
-BOARD_HEADER_VERSION := 2
-BOARD_RECOVERY_DTBO_SIZE := 2347796
-BOARD_RECOVERY_DTBO_OFFSET := 21106688
-BOARD_HEADER_SIZE := 1660
-BOARD_DTB_SIZE := 859398
-BOARD_DTB_OFFSET := 0x101f00000
-BOARD_PREBUILT_DTBIMAGE_DIR := $(LOCAL_PATH)/prebuilt
-TARGET_PREBUILT_DTB := $(LOCAL_PATH)/prebuilt/m11q-dtb
-BOARD_PREBUILT_DTBOIMAGE := $(LOCAL_PATH)/prebuilt/m11q-dtbo
-BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/Image.gz-dtb
-BOARD_KERNEL_CMDLINE := console=null androidboot.console=ttyMSM0 androidboot.hardware=qcom user_debug=30 msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 androidboot.usbconfigfs=true loop.max_part=7 printk.devkmsg=on
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_BOOT_HEADER_VERSION := 2
+#TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/Image.gz-dtb
+TARGET_KERNEL_SOURCE := kernel/samsung/j8y18lte
+TARGET_KERNEL_CONFIG := j8y18lte_defconfig
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 androidboot.selinux=permissive androidboot.usbcontroller=7000000.dwc3
 
-BOARD_MKBOOTIMG_ARGS += \
-	--base $(BOARD_KERNEL_BASE) \
-	--pagesize $(BOARD_KERNEL_PAGESIZE) \
-	--ramdisk_offset $(BOARD_RAMDISK_OFFSET) \
-	--tags_offset $(BOARD_TAGS_OFFSET) \
-	--kernel_offset $(BOARD_KERNEL_OFFSET) \
-	--second_offset $(BOARD_SECOND_OFFSET) \
-	--dtb_offset $(BOARD_DTB_OFFSET) \
-	--header_version $(BOARD_HEADER_VERSION) \
-	--dtb $(TARGET_PREBUILT_DTB) 
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_TAGS_OFFSET)
 
 # Kernel config
-TARGET_KERNEL_SOURCE := kernel/samsung/m11q
-TARGET_KERNEL_CONFIG := m11q_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/j8y18lte
+TARGET_KERNEL_CONFIG := j8y18lte_defconfig
 
 # fix this up by examining /proc/mtd on a running device
-BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432 #62
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432 #61
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 56491978752 #78 56491995136 - 16384
+BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432 #25
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432 #26
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3397386240 #40
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 57415790592 #43 57415806976 - 16384
 BOARD_CACHEIMAGE_PARTITION_SIZE := 314572800 #43
+BOARD_VENDORIMAGE_PARTITION_SIZE := 503316480 #41
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 1048576 #31
 BOARD_FLASH_BLOCK_SIZE := 131072
-
-# System as root
-BOARD_ROOT_EXTRA_FOLDERS := carrier config efs keydata keyrefuge metadata optics prism omr
-BOARD_SUPPRESS_SECURE_ERASE := true
-
-# Dynamic Partition
-BOARD_SUPER_PARTITION_SIZE := 4399824896
-BOARD_SUPER_PARTITION_GROUPS := samsung_dynamic_partitions
-BOARD_SAMSUNG_DYNAMIC_PARTITIONS_SIZE := 4395630592
-BOARD_SAMSUNG_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor odm product
 
 # Use these flags if the board has a ext4 partition larger than 2gb
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -107,17 +81,8 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 # QCOM
 BOARD_USES_QCOM_HARDWARE := true
 
-# Android Verified Boot
-BOARD_AVB_ENABLE := true
-BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
-BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
-BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
-BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flag 2
-
 # Crypto
-BOARD_USES_QCOM_FBE_DECRYPTION := true
+#BOARD_USES_QCOM_FBE_DECRYPTION := true
 
 # Properties
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
@@ -127,7 +92,7 @@ TARGET_COPY_OUT_VENDOR := vendor
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 
-TARGET_OTA_ASSERT_DEVICE := m11q
+TARGET_OTA_ASSERT_DEVICE := j8y18lte
 
 # Recovery
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true

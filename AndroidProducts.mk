@@ -13,10 +13,10 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_m11q.mk
+    $(LOCAL_DIR)/twrp_j8y18lte.mk
 
 
 COMMON_LUNCH_CHOICES := \
-     twrp_m11q-userdebug \
-     twrp_m11q-eng \
-     twrp_m11q-user
+     twrp_j8y18lte-userdebug \
+     twrp_j8y18lte-eng \
+     twrp_j8y18lte-user
